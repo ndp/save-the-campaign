@@ -5,7 +5,7 @@ Note: this deals with unfortunate situations where the redirects are unavoidable
 In general you should *rework inbound campaign links to avoid redirects.*
 This gem provides a nice safety net.
 
-== Usage
+## Usage
 
     # *Gemfile*
     gem 'save-the-campaign'
@@ -13,7 +13,7 @@ This gem provides a nice safety net.
 The gem will automatically patch ApplicationController so that the redirects are
 instrumented properly.
 
-== Configuration
+### Configuration
 
 By default, the gem forwards the following parameters:
   * `utm_campaign`
@@ -32,8 +32,14 @@ To forward other parameters, modify `SaveTheCampaign.configuration` using an ini
       config.params << 'email'
     end
 
+To only include the patch in specified controllers, you'll need to:
 
-== Use Case
+  1. pass `require: false` in the `Gemfile`
+  2. create an `initializers/save_the_campaign.rb` and configure `auto_install = false`
+  3. explicitly include `SaveTheCampaign::ControllerMixin` in any controllers that need
+     the behavior
+
+### Use Case
 
 If a marketing campaign drops a user on a page that redirects elsewhere,
 we want to preserve the `utm_` parameters passed in. An important case
@@ -46,23 +52,21 @@ we re-work our URL scheme, it's possible users will be redirected somewhere
 else, depending on their state.
 
 
-== How it Works
+### How it Works
 
 The essence of this functionality to patch `_compute_redirect_to_location`.
 The patch is found in `lib/save_the_campaign/installer.rb`.
 
 
-== References
+### References
 
    * http://www.e-nor.com/blog/web-analytics/no-data-from-one-or-more-sources-in-your-analytics-reports
    * https://support.google.com/analytics/answer/1033867?hl=en
 
 
-## Author
+### Author
 
-Andrew Peterson
-http://ndpsoftware.com
-andy@stitchfix.com or andy@ndpsoftware.com
+   * Andrew Peterson, [http://ndpsoftware.com], [andy@stitchfix.com], or [andy@ndpsoftware.com]
 
 
 ## Contributing & Bug Reports
