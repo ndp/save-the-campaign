@@ -7,7 +7,7 @@ This gem provides a nice safety net.
 
 ## Usage
 
-    # *Gemfile*
+    *Gemfile*
     gem 'save-the-campaign'
 
 The gem will automatically patch ApplicationController so that the redirects are
@@ -27,14 +27,14 @@ By default, the gem forwards the following parameters:
 
 To forward other parameters, modify `SaveTheCampaign.configuration` using an initializer:
 
-    # *initializers/save_the_campaign.rb*
+    *initializers/save_the_campaign.rb*
     SaveTheCampaign.configure do |config|
       config.params << 'email'
     end
 
 To only include the patch in specified controllers, you'll need to:
 
-  1. pass `require: false` in the `Gemfile`
+  1. use `gem 'save-the-campaign', require: false` in the `Gemfile`
   2. create an `initializers/save_the_campaign.rb` and configure `auto_install = false`
   3. explicitly include `SaveTheCampaign::ControllerMixin` in any controllers that need
      the behavior
